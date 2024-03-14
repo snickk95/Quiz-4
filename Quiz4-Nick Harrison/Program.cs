@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Quiz4_Nick_Harrison.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//add db connection
+string? connStr = builder.Configuration.GetConnectionString("Quiz4DB8476855");
+builder.Services.AddDbContext<BpmeasurementsContext>(options => options.UseSqlServer(connStr));
 
 var app = builder.Build();
 

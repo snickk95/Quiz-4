@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Quiz4_Nick_Harrison.Models;
 using System.Diagnostics;
+using Quiz4_Nick_Harrison.Entities;
+using System.IO;
+
 
 namespace Quiz4_Nick_Harrison.Controllers
 {
@@ -8,14 +11,21 @@ namespace Quiz4_Nick_Harrison.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        // The DB context param
+        private BpmeasurementsContext _BpmesurmentDbContext;
+
+        public HomeController(ILogger<HomeController> logger, BpmeasurementsContext bpmesurmentDbContext)
         {
             _logger = logger;
+
+            //setting the passed in obj to the private field
+            _BpmesurmentDbContext = bpmesurmentDbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<Bpmeasurement> Bp = _BpmesurmentDbContext.Bpmeasurements.OrderBy(Bp => Bp.BpmeasurementId).ToList();
+            return View(Bp);
         }
 
         public IActionResult Privacy()
