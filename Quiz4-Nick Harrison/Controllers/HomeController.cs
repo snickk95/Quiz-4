@@ -25,7 +25,7 @@ namespace Quiz4_Nick_Harrison.Controllers
         public IActionResult Index()
         {
             //fill list based on DB context
-            List<Bpmeasurement> Bp = _BpmesurmentDbContext.Bpmeasurements.OrderBy(Bp => Bp.BpmeasurementId).ToList();
+            List<Bpmeasurement> Bp = _BpmesurmentDbContext.Bpmeasurements.OrderByDescending(b => b.MeasurementDate).ToList();
            
             //loop through the list to make the measurement position obj not null anymore
             foreach(Bpmeasurement b in Bp) 
@@ -33,7 +33,7 @@ namespace Quiz4_Nick_Harrison.Controllers
                 b.MeasurementPosition = _BpmesurmentDbContext.MeasurementPositions.Find(b.MeasurementPositionId);
             }
 
-            //return the list to the index view 
+            //return the list to the index view ordered by name of position measurment was taken
             return View(Bp);
         }
 
