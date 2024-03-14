@@ -1,8 +1,36 @@
-﻿@{
+﻿@model List<Quiz4_Nick_Harrison.Entities.Bpmeasurement>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <h1 class="display-4">Welcome To The Solution Space Of Quiz 4 For Student 8476855</h1>
+    </div>
+ <!-- table to display the data-->
+<table class="table table-bordered table-striped">
+    <thead>
+        <!--the headings for the data-->
+        <tr>
+            <th>Systolic</th>
+            <th>Diastolic</th>
+            <th>Date of Measurement</th>
+            <th>Position</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--loop through each index of the list and assign values to the cells-->
+        @foreach (Quiz4_Nick_Harrison.Entities.Bpmeasurement m in Model)
+        {
+            <tr>
+                <td>@m.Systolic</td>
+                <td>@m.Diastolic</td>
+                <td>@m.MeasurementDate</td>
+                <td>@m.MeasurementPosition?.Name</td>
+                
+            </tr>
+        }
+
+
+    </tbody>
+</table>

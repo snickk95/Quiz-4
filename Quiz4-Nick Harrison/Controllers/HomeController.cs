@@ -24,7 +24,16 @@ namespace Quiz4_Nick_Harrison.Controllers
 
         public IActionResult Index()
         {
+            //fill list based on DB context
             List<Bpmeasurement> Bp = _BpmesurmentDbContext.Bpmeasurements.OrderBy(Bp => Bp.BpmeasurementId).ToList();
+           
+            //loop through the list to make the measurement position obj not null anymore
+            foreach(Bpmeasurement b in Bp) 
+            {
+                b.MeasurementPosition = _BpmesurmentDbContext.MeasurementPositions.Find(b.MeasurementPositionId);
+            }
+
+            //return the list to the index view 
             return View(Bp);
         }
 
